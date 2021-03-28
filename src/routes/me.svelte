@@ -1,12 +1,12 @@
 <script>
-  import Login from '$lib/Login.svelte';
+  import ProfileInfo from '$lib/ProfileInfo.svelte';
+  import Map from '$lib/Map.svelte';
 </script>
 
 <main>
-  <h1>Bike Tracker</h1>
-
-  <Login />
-  <a href="/me">My profile</a>
+  <h1>My Profile</h1>
+  <ProfileInfo />
+  <Map />
 </main>
 
 <style lang="scss">
