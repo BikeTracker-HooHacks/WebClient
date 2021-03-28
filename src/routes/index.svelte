@@ -1,12 +1,14 @@
 <script>
   import Login from '$lib/Login.svelte';
+  import { user } from '$lib/stores';
+
+  user.subscribe((v) => console.log(v));
 </script>
 
 <main>
   <h1>Bike Tracker</h1>
 
   <Login />
-  <a href="/me">My profile</a>
 </main>
 
 <style lang="scss">

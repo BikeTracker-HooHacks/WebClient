@@ -1,25 +1,26 @@
-const url = 'http://dev.wzhang.me';
+const url = 'https://dev.wzhang.me';
 
-export const post = async (endpoint, ...args) => {
+export const post = async (endpoint, data) => {
   try {
     const res = await fetch(`${url}/${endpoint}`, {
       method: 'POST',
-      ...args
+      // credentials: 'include',
+      body: data,
+      headers: { 'Content-Type': 'application/json' }
     });
-    return res;
+    return await res.json();
   } catch (err) {
     return err;
   }
 };
 
-
-export const get = async (endpoint, ...args) => {
+export const get = async (endpoint) => {
   try {
     const res = await fetch(`${url}/${endpoint}`, {
-      method: 'GET',
-      ...args
+      method: 'GET'
+      // credentials: 'include'
     });
-    return res;
+    return await res.json();
   } catch (err) {
     return err;
   }
