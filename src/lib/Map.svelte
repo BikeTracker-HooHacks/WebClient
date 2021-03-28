@@ -6,17 +6,44 @@
   let map;
   let mapEl;
   let L;
+  let markerLayers;
 
   let tracker_values;
   trackers.subscribe((v) => {
     tracker_values = v;
   });
 
-  console.log(trackers)
+  $: opacityScale = d3
+    .scaleLinear()
+    .domain(d3.extent(tracker_values[0].data.map((d) => d.timestamp)))
+    .range([0.2, 1]);
 
   $: avg_lat = d3.mean(tracker_values[0].data.map((d) => d.lat));
   $: avg_lng = d3.mean(tracker_values[0].data.map((d) => d.lng));
-  $: map?.setView([avg_lat, avg_lng], 14)
+  $: map?.setView([avg_lat, avg_lng], 14);
+
+  $: if (map) {
+    drawMarkers(tracker_values[0]);
+    console.log(tracker_values[0]);
+  }
+
+  const createMarker = (datum) => {
+    const html = `<div style="opacity: ${opacityScale(datum.timestamp)}">🚲</div>`;
+    const icon = L.divIcon({
+      html,
+      className: 'map-marker'
+    });
+    const marker = L.marker([datum.lat, datum.lng], { icon });
+    return marker;
+  };
+
+  const drawMarkers = (coords) => {
+    if (!markerLayers) markerLayers = L.layerGroup();
+    coords.data.map((d) => {
+      markerLayers.addLayer(createMarker(d));
+    });
+    markerLayers.addTo(map);
+  };
 
   const initMap = (container) => {
     const m = L.map(container).setView([avg_lat, avg_lng], 14);
@@ -30,6 +57,7 @@
 
   const drawMap = (container) => {
     map = initMap(container);
+    drawMarkers(tracker_values[0]);
     return {
       destroy: () => {
         map.remove();

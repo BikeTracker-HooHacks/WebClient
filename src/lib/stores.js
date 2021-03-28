@@ -10,7 +10,7 @@ export const user = writable({
 });
 
 const faketracker1 = [
-  ({ timestamp: 1616899388, lat: 38.039722, lng: -78.510702 },
+  { timestamp: 1616899388, lat: 38.039722, lng: -78.510702 },
   { timestamp: 1616899528, lat: 38.038995, lng: -78.511153 },
   { timestamp: 1616899664, lat: 38.037187, lng: -78.51066 },
   { timestamp: 1616899690, lat: 38.036726, lng: -78.514392 },
@@ -29,7 +29,7 @@ const faketracker1 = [
   { timestamp: 1616900062, lat: 38.028377, lng: -78.476402 },
   { timestamp: 1616900109, lat: 38.024557, lng: -78.478982 },
   { timestamp: 1616900300, lat: 38.022968, lng: -78.484522 },
-  { timestamp: 1616900333, lat: 38.02574, lng: -78.488644 })
+  { timestamp: 1616900333, lat: 38.02574, lng: -78.488644 }
 ];
 export const trackers = writable([{
   id: "id1",
