@@ -1,12 +1,39 @@
 <script>
+  import { browser } from '$app/env';
   import ProfileInfo from '$lib/ProfileInfo.svelte';
   import Map from '$lib/Map.svelte';
+  import { user, trackers } from '$lib/stores';
+  import { get } from '$lib/api';
+
+  let user_value;
+  let tracker_values;
+
+  user.subscribe(async (v) => {
+    user_value = v;
+    trackers.set([]);
+    let all_trackers;
+    if (browser) {
+      try {
+        all_trackers = await Promise.all(v.trackers.map((d) => get(`tracker/${d.id}`)));
+      } catch (err) {
+        console.log('Err will robinson');
+        console.log(err);
+      }
+    }
+  });
+
+  trackers.subscribe((v) => (tracker_values = v));
 </script>
 
 <main>
-  <h1>My Profile</h1>
-  <ProfileInfo />
-  <Map />
+  {#if !!user_value}
+    <h1>My Profile</h1>
+    <ProfileInfo />
+
+    {#if tracker_values.length > 0}
+      <Map />
+    {/if}
+  {/if}
 </main>
 
 <style lang="scss">
