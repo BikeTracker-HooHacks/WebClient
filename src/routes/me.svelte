@@ -14,7 +14,7 @@
     let all_trackers;
     if (browser) {
       try {
-        all_trackers = await Promise.all(v.trackers.map((d) => get(`tracker/${d.id}`)));
+        all_trackers = await Promise.all(v.trackers.map(async (d) => await get(`tracker/${d.id}`)));
         trackers.set(all_trackers)
       } catch (err) {
         console.log('Err will robinson');

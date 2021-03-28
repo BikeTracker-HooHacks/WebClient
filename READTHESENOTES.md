@@ -4,6 +4,7 @@ front-end API fetch stuff, here are some pointers.
 1. if all goes well, it should just work™.
 2. That's probably not going to happen so,
 3. The actual fetching code is in `src/lib/api.js`. This is very basic fetch.
+   This is also where I specify the API endpoint.
 4. There is login code in `src/lib/auth.js`.
 5. I also fetch the tracker data in `src/routes/me.svelte`, on line 17.
 
