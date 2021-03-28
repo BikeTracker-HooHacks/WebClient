@@ -2,7 +2,7 @@
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
   import { trackers } from '$lib/stores';
-  /* import * as d3 from 'd3'; */
+  import * as d3 from 'd3';
   let map;
   let mapEl;
   let L;
@@ -28,8 +28,7 @@
   }
 
   const createMarker = (datum) => {
-    const html = `<div style="opacity: 1">🚲</div>`;
-    /* const html = `<div style="opacity: ${opacityScale(datum.timestamp)}">🚲</div>`; */
+    const html = `<div style="opacity: ${opacityScale(datum.timestamp)}">🚲</div>`;
     const icon = L.divIcon({
       html,
       className: 'map-marker'
