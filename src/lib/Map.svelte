@@ -24,7 +24,11 @@
   $: map?.setView([avg_lat, avg_lng], 14);
 
   $: if (map) {
-    drawMarkers(tracker_values[0]);
+    for (let i=0; i < tracker_values.length; i++) {
+        drawMarkers(tracker_values[i]);
+        console.log("hi:" + JSON.stringify(tracker_values[i]));
+        drawConnections(tracker_values[i]);
+    }
   }
 
   const createMarker = (datum) => {
@@ -44,6 +48,10 @@
       markerLayers.addLayer(createMarker(d));
     });
     markerLayers.addTo(map);
+  };
+
+  const drawConnections = (values) => {
+    L.polyline(values.data, {color: '#ff3e00', opacity: 0.5}).addTo(map);
   };
 
   const initMap = (container) => {

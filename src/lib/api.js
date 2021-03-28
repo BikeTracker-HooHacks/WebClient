@@ -8,6 +8,7 @@ export const post = async (endpoint, data) => {
       body: data,
       headers: { 'Content-Type': 'application/json' }
     });
+    console.log(res.json());
     return await res.json();
   } catch (err) {
     return err;

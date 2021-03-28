@@ -1,6 +1,5 @@
 import { writable } from 'svelte/store';
 
-export const user = writable(null);
 
 const faketracker1 = [
   { timestamp: 1616899388, lat: 38.039722, lng: -78.510702 },
@@ -30,3 +29,5 @@ export const trackers = writable([{
   data: faketracker1
 }])
 
+
+export const user = writable({"name": "William", "trackers": [{ id: "id1", name: "Bike 1", data: faketracker1}]});

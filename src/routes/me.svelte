@@ -10,12 +10,12 @@
 
   user.subscribe(async (v) => {
     user_value = v;
-      console.log(user_value)
-    trackers.set([]);
+    console.log("user: " + JSON.stringify(user_value))
     let all_trackers;
     if (browser) {
       try {
         all_trackers = await Promise.all(v.trackers.map(async (d) => await get(`tracker/${d.id}`)));
+        console.log("all trackers: " + JSON.stringify(all_trackers));
         trackers.set(all_trackers)
       } catch (err) {
         console.log('Err will robinson');
@@ -24,7 +24,11 @@
     }
   });
 
-  trackers.subscribe((v) => (tracker_values = v));
+  trackers.subscribe((v) => {
+        console.log("trackers sub: " + JSON.stringify(v));
+        tracker_values = v
+      }
+  );
 </script>
 
 <main>

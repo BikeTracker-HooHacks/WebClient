@@ -7,7 +7,7 @@
   });
 </script>
 
-<h1>Welcome, {user_value.display_name}!</h1>
+<h1>Welcome, {user_value.name}!</h1>
 <p>You have {user_value.trackers.length} active trackers.</p>
 
 {#if user_value.trackers.length > 0}
