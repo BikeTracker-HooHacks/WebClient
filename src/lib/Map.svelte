@@ -1,16 +1,29 @@
 <script charset="utf-8">
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
+  import { trackers } from '$lib/stores';
+  import * as d3 from 'd3';
   let map;
   let mapEl;
   let L;
 
+  let tracker_values;
+  trackers.subscribe((v) => {
+    tracker_values = v;
+  });
+
+  console.log(trackers)
+
+  $: avg_lat = d3.mean(tracker_values[0].data.map((d) => d.lat));
+  $: avg_lng = d3.mean(tracker_values[0].data.map((d) => d.lng));
+  $: map?.setView([avg_lat, avg_lng], 14)
+
   const initMap = (container) => {
-    const m = L.map(container).setView([0, 0], 3);
+    const m = L.map(container).setView([avg_lat, avg_lng], 14);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: `&copy;<a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>`,
       subdomains: 'abcd',
-      maxZoom: 14
+      maxZoom: 18
     }).addTo(m);
     return m;
   };
