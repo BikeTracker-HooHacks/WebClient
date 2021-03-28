@@ -10,6 +10,7 @@
 
   user.subscribe(async (v) => {
     user_value = v;
+      console.log(user_value)
     trackers.set([]);
     let all_trackers;
     if (browser) {

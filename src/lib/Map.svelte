@@ -39,6 +39,7 @@
 
   const drawMarkers = (coords) => {
     if (!markerLayers) markerLayers = L.layerGroup();
+    console.log(coords)
     coords.data.map((d) => {
       markerLayers.addLayer(createMarker(d));
     });
