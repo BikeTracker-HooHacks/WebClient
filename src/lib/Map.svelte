@@ -24,7 +24,6 @@
 
   $: if (map) {
     drawMarkers(tracker_values[0]);
-    console.log(tracker_values[0]);
   }
 
   const createMarker = (datum) => {
